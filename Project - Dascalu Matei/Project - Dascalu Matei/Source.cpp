@@ -10,7 +10,7 @@ int main() {
     cout << "Location created with ID: " << l1.getId() << endl;
     cout << endl;
 
-    Location stadium("Arena Nationala", 50000);
+    Location stadium("Camp Nou", 50000);
     cout << "Stadium created with ID: " << stadium.getId() << endl;
     cout << endl;
 
