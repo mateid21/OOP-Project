@@ -1,12 +1,21 @@
 #include "Event.h"
 #include <iostream>
 
-Event::Event() : matchName(nullptr), matchDate(nullptr) {
+
+using namespace std;
+
+Event::Event() {
+    matchName = nullptr;
+    matchDate = nullptr;
     teams[0] = nullptr;
     teams[1] = nullptr;
 }
 
 Event::Event(const char* name, const char* date, const char* team1, const char* team2) {
+    if (!isDateValid(date)) {
+        throw exception("Date does not respect the YYYY-MM-DD format");
+    }
+
     matchName = new char[strlen(name) + 1];
     strcpy(matchName, name);
 
@@ -15,6 +24,7 @@ Event::Event(const char* name, const char* date, const char* team1, const char* 
 
     teams[0] = new char[strlen(team1) + 1];
     strcpy(teams[0], team1);
+
     teams[1] = new char[strlen(team2) + 1];
     strcpy(teams[1], team2);
 }
@@ -60,6 +70,9 @@ void Event::setMatchName(const char* name) {
 }
 
 void Event::setMatchDate(const char* date) {
+    if (!isDateValid(date)) {
+        throw exception("Date does not respect the YYYY-MM-DD format");
+    }
     delete[] matchDate;
     matchDate = new char[strlen(date) + 1];
     strcpy(matchDate, date);
@@ -83,4 +96,19 @@ const char* Event::getMatchDate() const {
 
 const char* Event::getTeam(int index) const {
     return index >= 0 && index < 2 ? teams[index] : nullptr;
+}
+
+bool Event::isDateValid(const char* date) {
+    if (strlen(date) != 10) return false;
+
+    for (int i = 0; i < 10; ++i) {
+        if (i == 4 || i == 7) {
+            if (date[i] != '-') return false;
+        }
+        else {
+            if (!isdigit(date[i])) return false;
+        }
+    }
+
+    return true;
 }

@@ -50,9 +50,6 @@ void testLocationClass() {
 
     //-
     cout << "Capacity difference between " << stadium2.getStadiumName() << " and " << stadium.getStadiumName() << ": " << stadium2 - stadium << " seats" << endl;
-    cout << endl;
-
-    cout << endl;
 }
 
 void testEventClass(){
@@ -75,12 +72,26 @@ void testEventClass(){
     cout << "Team 1: " << footballMatch.getTeam(0) << endl;
     cout << "Team 2: " << footballMatch.getTeam(1) << endl;
     cout << endl;
+
+    // attempting to set an invalid date format
+    cout << "Attempting to set an invalid date format..." << endl;
+    try {
+        footballMatch.setMatchDate("03-03-2023");
+    }
+    catch (const exception& e) {
+        cout << e.what() << endl;
+    }
 }
 
 int main() {
 
-    //testLocationClass();
-    cout << "-----------------------------------" << endl;
+    testLocationClass();
+    cout << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+    cout << endl;
     testEventClass();
+    cout << endl;
+    cout << "-------------------------------------------------------------------------------" << endl;
+
     return 0;
 }

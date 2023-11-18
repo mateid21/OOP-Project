@@ -5,7 +5,7 @@
 class Event {
 private:
     char* matchName;  
-    char* matchDate;   //(YYYY-MM-DD)
+    char* matchDate;//(YYYY-MM-DD)
     char* teams[2];    
 
 public:
@@ -25,6 +25,7 @@ public:
 private:
     void copyTeams(char* const teams[2]);
     void clearTeams();
+    bool isDateValid(const char* date);
 };
 
 #endif 
