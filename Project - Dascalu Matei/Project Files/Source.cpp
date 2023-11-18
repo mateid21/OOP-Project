@@ -1,10 +1,10 @@
 #include "Location.h"
+#include "Event.h"
 #include <iostream>
 
 using namespace std;
 
-int main() {
-
+void testLocationClass() {
     //Testing Location class functions
     Location l1;
     cout << "Location created with ID: " << l1.getId() << endl;
@@ -18,7 +18,7 @@ int main() {
     cout << "Initial Details of stadium:" << endl;
     cout << "Name: " << stadium.getStadiumName() << endl;
     cout << "Capacity: " << stadium.getCapacity() << endl;
-    
+
     stadium.setStadiumName("Stamford Bridge");
     stadium.setCapacity(55000);
 
@@ -39,7 +39,7 @@ int main() {
     //>=
     Location stadium2("San Siro", 80018);
     if (stadium >= stadium2) {
-        cout << stadium.getStadiumName() << "(" << stadium.getCapacity() << ")" << " has a capacity greater than or equal to " 
+        cout << stadium.getStadiumName() << "(" << stadium.getCapacity() << ")" << " has a capacity greater than or equal to "
             << stadium2.getStadiumName() << "(" << stadium2.getCapacity() << ")" << endl;
     }
     else {
@@ -53,5 +53,34 @@ int main() {
     cout << endl;
 
     cout << endl;
+}
+
+void testEventClass(){
+    // Testing Event class functions
+    Event footballMatch("El Clasico", "2024-03-02", "Real Madrid", "Barcelona");
+
+    cout << "Football Match: " << footballMatch.getMatchName() << endl;
+    cout << "Date: " << footballMatch.getMatchDate() << endl;
+    cout << "Team 1: " << footballMatch.getTeam(0) << endl;
+    cout << "Team 2: " << footballMatch.getTeam(1) << endl;
+    cout << endl;
+
+    // change the date of the match
+    footballMatch.setMatchDate("2023-03-03");
+
+    // display updated details
+    cout << "Updated Match Details: " << endl;
+    cout << "Football Match: " << footballMatch.getMatchName() << endl;
+    cout << "New Date: " << footballMatch.getMatchDate() << endl;
+    cout << "Team 1: " << footballMatch.getTeam(0) << endl;
+    cout << "Team 2: " << footballMatch.getTeam(1) << endl;
+    cout << endl;
+}
+
+int main() {
+
+    //testLocationClass();
+    cout << "-----------------------------------" << endl;
+    testEventClass();
     return 0;
 }
