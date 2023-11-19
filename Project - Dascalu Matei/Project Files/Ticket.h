@@ -29,4 +29,4 @@ public:
     void setSeatNumbers(const int* seats, int count);
 };
 
-#endif // TICKET_H
+#endif 
