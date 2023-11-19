@@ -1,5 +1,6 @@
 #include "Location.h"
 #include "Event.h"
+#include "Ticket.h"
 #include <iostream>
 
 using namespace std;
@@ -83,6 +84,37 @@ void testEventClass(){
     }
 }
 
+void testTicketClass() {
+    // Testing Ticket class functions
+    int seats[] = { 12, 13, 14 };
+    Ticket ticket1(100.0, 5, seats, 3);
+
+    // Displaying ticket details
+    cout << "Ticket created with ID: " << ticket1.getTicketId() << endl;
+    cout << "Price: $" << ticket1.getPrice() << ", Row: " << ticket1.getRow() << ", Seats: ";
+    const int* ticketSeats = ticket1.getSeatNumbers();
+    for (int i = 0; i < ticket1.getSeatCount(); i++) {
+        cout << ticketSeats[i] << (i < ticket1.getSeatCount() - 1 ? ", " : "");
+    }
+    cout << endl << endl;
+
+    // Modifying ticket attributes
+    cout << "Modifying ticket price and row..." << endl;
+    ticket1.setPrice(150.0);
+    ticket1.setRow(3);
+    int newSeats[] = { 15, 16, 17 };
+    ticket1.setSeatNumbers(newSeats, 3);
+
+    // Displaying updated ticket details
+    cout << "Updated Ticket Details:" << endl;
+    cout << "Price: $" << ticket1.getPrice() << ", Row: " << ticket1.getRow() << ", Seats: ";
+    ticketSeats = ticket1.getSeatNumbers();
+    for (int i = 0; i < ticket1.getSeatCount(); i++) {
+        cout << ticketSeats[i] << (i < ticket1.getSeatCount() - 1 ? ", " : "");
+    }
+    cout << endl;
+}
+
 int main() {
 
     testLocationClass();
@@ -92,6 +124,10 @@ int main() {
     testEventClass();
     cout << endl;
     cout << "-------------------------------------------------------------------------------" << endl;
+    cout << endl;
+    testTicketClass();
+    cout << endl;
+
 
     return 0;
 }
