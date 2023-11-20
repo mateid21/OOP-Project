@@ -1,7 +1,6 @@
 #include "Event.h"
 #include <iostream>
 
-
 using namespace std;
 
 Event::Event() {
@@ -112,3 +111,8 @@ bool Event::isDateValid(const char* date) {
 
     return true;
 }
+
+bool Event::operator<(const Event& other) const {
+    return strcmp(matchDate, other.matchDate) < 0;
+}
+

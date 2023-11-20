@@ -82,6 +82,20 @@ void testEventClass() {
 	catch (const exception& e) {
 		cout << e.what() << endl;
 	}
+	cout << endl;
+
+	//checking if an event happens before or after a different event with <operator
+	Event match1("Match 1", "2022-01-25", "Team A", "Team B");
+	Event match2("Match 2", "2022-01-24", "Team C", "Team D");
+	cout << "Match 1: " << match1.getMatchDate()<<"; ";
+	cout << "Match 2: " << match2.getMatchDate();
+	cout << endl;
+	if (match1 < match2) {
+		cout << "Match 1 occurs before Match 2" << endl;
+	}
+	else {
+		cout << "Match 1 occurs after Match 2" << endl;
+	}
 }
 
 void testTicketClass() {
