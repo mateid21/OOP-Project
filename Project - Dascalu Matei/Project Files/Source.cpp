@@ -164,11 +164,11 @@ int main() {
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << endl;
-	//testEventClass();
+	testEventClass();
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << endl;
-	//testTicketClass();
+	testTicketClass();
 	cout << endl;
 
 
