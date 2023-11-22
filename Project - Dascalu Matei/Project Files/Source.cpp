@@ -87,7 +87,7 @@ void testEventClass() {
 	//checking if an event happens before or after a different event with <operator
 	Event match1("Match 1", "2022-01-25", "Team A", "Team B");
 	Event match2("Match 2", "2022-01-24", "Team C", "Team D");
-	cout << "Match 1: " << match1.getMatchDate()<<"; ";
+	cout << "Match 1: " << match1.getMatchDate() << "; ";
 	cout << "Match 2: " << match2.getMatchDate();
 	cout << endl;
 	if (match1 < match2) {
@@ -127,6 +127,23 @@ void testTicketClass() {
 		cout << ticketSeats[i] << (i < ticket1.getSeatCount() - 1 ? ", " : "");
 	}
 	cout << endl;
+	cout << endl;
+
+	//create a second ticket
+	int seats2[] = { 4, 5, 6 };
+	Ticket ticket2(60.0, 6, seats2, 3);
+
+	//+op and =op
+	Ticket combinedTicket = ticket1 + ticket2;
+
+	// display details of the combined ticket
+	cout << "Combined Ticket created with ID: " << combinedTicket.getTicketId() << endl << "Price: $" << combinedTicket.getPrice()
+		<< ", Row: " << combinedTicket.getRow() << ", Seats: ";
+	const int* combinedSeats = combinedTicket.getSeatNumbers();
+	for (int i = 0; i < combinedTicket.getSeatCount(); i++) {
+		cout << combinedSeats[i] << (i < combinedTicket.getSeatCount() - 1 ? ", " : "");
+	}
+	cout << endl << endl;
 }
 
 int main() {

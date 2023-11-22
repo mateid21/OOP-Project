@@ -15,6 +15,8 @@ public:
     Ticket();
     Ticket(double cost, int row, const int* seats, int count);
     Ticket(const Ticket& other);
+    Ticket& operator=(const Ticket& other);
+    Ticket operator+(const Ticket& other) const;
 
     ~Ticket();
 
