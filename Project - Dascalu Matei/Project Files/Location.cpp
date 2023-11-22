@@ -3,64 +3,87 @@
 
 using namespace std;
 
-int Location::noOfStadiums = 0;
+int Location::noOfStadiums = 1;
 
 Location::Location() : id(noOfStadiums++) {
-    stadiumName = new char[1];
-    stadiumName[0] = '\0';
-    capacity = 0;
+	stadiumName = new char[1];
+	stadiumName[0] = '\0';
+	capacity = 0;
 }
 
 Location::Location(const char* name, int cap) : id(noOfStadiums++) {
-    stadiumName = new char[strlen(name) + 1];
-    strcpy(stadiumName, name);
-    capacity = cap;
+	stadiumName = new char[strlen(name) + 1];
+	strcpy(stadiumName, name);
+	capacity = cap;
 }
 
 Location::Location(const Location& other) : id(noOfStadiums++) {
-    stadiumName = new char[strlen(other.stadiumName) + 1];
-    strcpy(stadiumName, other.stadiumName);
-    capacity = other.capacity;
+	stadiumName = new char[strlen(other.stadiumName) + 1];
+	strcpy(stadiumName, other.stadiumName);
+	capacity = other.capacity;
 }
 
 Location::~Location() {
-    delete[] stadiumName;
+	delete[] stadiumName;
 }
 
 void Location::setStadiumName(const char* name) {
-    if (name != nullptr) {
-        delete[] stadiumName;
-        stadiumName = new char[strlen(name) + 1];
-        strcpy(stadiumName, name);
-    }
+	if (name != nullptr) {
+		delete[] stadiumName;
+		stadiumName = new char[strlen(name) + 1];
+		strcpy(stadiumName, name);
+	}
 }
 
 const char* Location::getStadiumName() const {
-    return stadiumName;
+	return stadiumName;
 }
 
 void Location::setCapacity(int cap) {
-    if (cap >= 0) {
-        capacity = cap;
-    }
+	if (cap >= 0) {
+		capacity = cap;
+	}
 }
 
 int Location::getCapacity() const {
-    return capacity;
+	return capacity;
 }
 
 int Location::getId() const {
-    return id;
+	return id;
 }
 
 int Location::getNoOfStadiums() {
-    return noOfStadiums;
+	return noOfStadiums;
 }
 
 bool operator>=(const Location& firstLocation, const Location& secondLocation) {
-    return firstLocation.getCapacity() >= secondLocation.getCapacity();
+	return firstLocation.getCapacity() >= secondLocation.getCapacity();
 }
 
 int operator-(const Location& first, const Location& second) {
-    return first.capacity - second.capacity;
+	return first.capacity - second.capacity;
+}
+
+ostream& operator<<(ostream& os, const Location& loc) {
+	os << "Stadium Name: " << loc.getStadiumName() << ", Capacity: " << loc.getCapacity() << ", ID: " << loc.getId();
+	return os;
+}
+
+istream& operator>>(istream& is, Location& loc) {
+	char tempName[100];
+	int tempCapacity;
+	cout << "Enter Stadium Name: ";
+	if (is.peek() == '\n') {
+		is.ignore();
+	}
+	is.getline(tempName, 100);
+
+	cout << "Enter Capacity: ";
+	is >> tempCapacity;
+
+	loc.setStadiumName(tempName);
+	loc.setCapacity(tempCapacity);
+
+	return is;
 }

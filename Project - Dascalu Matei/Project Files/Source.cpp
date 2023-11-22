@@ -7,30 +7,21 @@ using namespace std;
 
 void testLocationClass() {
 	//Testing Location class functions
-	Location l1;
-	cout << "Location created with ID: " << l1.getId() << endl;
-	cout << endl;
 
-	Location stadium("Camp Nou", 50000);
-	cout << "Stadium created with ID: " << stadium.getId() << endl;
+	Location stadium;
+	cout << "Enter details for a new stadium (name and capacity) " << endl;
+	cin >> stadium;
+	cout << endl;
+	cout << "Stadium created: " << endl << stadium << endl;
 	cout << endl;
 
 	//changing attributes
-	cout << "Initial Details of stadium:" << endl;
-	cout << "Name: " << stadium.getStadiumName() << endl;
-	cout << "Capacity: " << stadium.getCapacity() << endl;
-
-	stadium.setStadiumName("Stamford Bridge");
-	stadium.setCapacity(55000);
-
-	cout << "Updated details of stadium:" << endl;
-	cout << "Name: " << stadium.getStadiumName() << endl;
-	cout << "Capacity: " << stadium.getCapacity() << endl;
+	cout << "Enter NEW details for the stadium (name and capacity) ";
+	cout << endl;
+	cin >> stadium;
 	cout << endl;
 
-	//trying to set an invalid value to capacity
-	stadium.setCapacity(-100);
-	cout << "Attempted to set negative capacity. Current capacity: " << stadium.getCapacity() << endl;
+	cout << "Updated details of stadium: " << endl << stadium << endl;
 	cout << endl;
 
 	//getNoOfStadiums()
@@ -39,6 +30,9 @@ void testLocationClass() {
 
 	//>=op
 	Location stadium2("San Siro", 80018);
+	cout << stadium2;
+	cout << endl;
+
 	if (stadium >= stadium2) {
 		cout << stadium.getStadiumName() << "(" << stadium.getCapacity() << ")" << " has a capacity greater than or equal to "
 			<< stadium2.getStadiumName() << "(" << stadium2.getCapacity() << ")" << endl;
@@ -170,11 +164,11 @@ int main() {
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << endl;
-	testEventClass();
+	//testEventClass();
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << endl;
-	testTicketClass();
+	//testTicketClass();
 	cout << endl;
 
 

@@ -1,6 +1,9 @@
 #pragma once
 #ifndef LOCATION_H
 #define LOCATION_H
+#include <iostream>
+
+using namespace std;
 
 class Location {
 private:
@@ -24,6 +27,8 @@ public:
 
     friend bool operator>=(const Location& firstLocation, const Location& secondLocation);
     friend int operator-(const Location& first, const Location& second);
+    friend ostream& operator<<(ostream& os, const Location& loc);
+    friend istream& operator>>(istream& is, Location& loc);
 };
 
 #endif
