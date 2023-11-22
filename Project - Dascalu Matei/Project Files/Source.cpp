@@ -37,7 +37,7 @@ void testLocationClass() {
 	cout << "Total Number of stadiums created: " << Location::getNoOfStadiums() << endl;
 	cout << endl;
 
-	//>=
+	//>=op
 	Location stadium2("San Siro", 80018);
 	if (stadium >= stadium2) {
 		cout << stadium.getStadiumName() << "(" << stadium.getCapacity() << ")" << " has a capacity greater than or equal to "
@@ -49,7 +49,7 @@ void testLocationClass() {
 	}
 	cout << endl;
 
-	//-
+	//-op
 	cout << "Capacity difference between " << stadium2.getStadiumName() << " and " << stadium.getStadiumName() << ": " << stadium2 - stadium << " seats" << endl;
 }
 
@@ -84,7 +84,7 @@ void testEventClass() {
 	}
 	cout << endl;
 
-	//checking if an event happens before or after a different event with <operator
+	//<checking if an event happens before or after a different event with <operator
 	Event match1("Match 1", "2022-01-25", "Team A", "Team B");
 	Event match2("Match 2", "2022-01-24", "Team C", "Team D");
 	cout << "Match 1: " << match1.getMatchDate() << "; ";
@@ -95,6 +95,24 @@ void testEventClass() {
 	}
 	else {
 		cout << "Match 1 occurs after Match 2" << endl;
+	}
+	cout << endl;
+
+	//==operator checking if two events are the same
+	Event match3("Match 1", "2022-01-25", "Team A", "Team B");
+
+	if (match1 == match2) {
+		cout << "Match 1 and Match 2 are the same." << endl;
+	}
+	else {
+		cout << "Match 1 and Match 2 are different." << endl;
+	}
+
+	if (match1 == match3) {
+		cout << "Match 1 and Match 3 are the same." << endl;
+	}
+	else {
+		cout << "Match 1 and Match 3 are different." << endl;
 	}
 }
 

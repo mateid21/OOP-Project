@@ -13,7 +13,6 @@ public:
     Location();
     Location(const char* name, int cap);
     Location(const Location& other);
-    Location& operator=(const Location& other);
     ~Location();
 
     void setStadiumName(const char* name);

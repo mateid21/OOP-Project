@@ -116,3 +116,11 @@ bool Event::operator<(const Event& other) const {
     return strcmp(matchDate, other.matchDate) < 0;
 }
 
+bool Event::operator==(const Event& other) const {
+    return strcmp(matchName, other.matchName) == 0 &&
+        strcmp(matchDate, other.matchDate) == 0 &&
+        strcmp(teams[0], other.teams[0]) == 0 &&
+        strcmp(teams[1], other.teams[1]) == 0;
+}
+
+
