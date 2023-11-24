@@ -116,13 +116,8 @@ void testTicketClass() {
 	Ticket ticket1(100.0, 5, seats, 3);
 
 	// ticket details
-	cout << "Ticket created with ID: " << ticket1.getTicketId() << endl;
-	cout << "Price: $" << ticket1.getPrice() << ", Row: " << ticket1.getRow() << ", Seats: ";
-	const int* ticketSeats = ticket1.getSeatNumbers();
-	for (int i = 0; i < ticket1.getSeatCount(); i++) {
-		cout << ticketSeats[i] << (i < ticket1.getSeatCount() - 1 ? ", " : "");
-	}
-	cout << endl << endl;
+	cout << ticket1;
+	cout << endl;
 
 	// modify ticket attributes
 	cout << "Modifying ticket price and row... " << endl;
@@ -132,39 +127,30 @@ void testTicketClass() {
 	ticket1.setSeatNumbers(newSeats, 3);
 
 	// display updated ticket details
-	cout << "Updated Ticket Details: " << endl;
-	cout << "Price: $" << ticket1.getPrice() << ", Row: " << ticket1.getRow() << ", Seats: ";
-	ticketSeats = ticket1.getSeatNumbers();
-	for (int i = 0; i < ticket1.getSeatCount(); i++) {
-		cout << ticketSeats[i] << (i < ticket1.getSeatCount() - 1 ? ", " : "");
-	}
-	cout << endl;
+	cout << ticket1;
 	cout << endl;
 
 	//create a second ticket
-	int seats2[] = { 4, 5, 6 };
-	Ticket ticket2(60.0, 6, seats2, 3);
+	Ticket ticket2;
+	cin >> ticket2;
+	cout << ticket2<<endl;
+	cout << endl;
 
 	//+op and =op
 	Ticket combinedTicket = ticket1 + ticket2;
 
 	// display details of the combined ticket
-	cout << "Combined Ticket created with ID: " << combinedTicket.getTicketId() << endl << "Price: $" << combinedTicket.getPrice()
-		<< ", Row: " << combinedTicket.getRow() << ", Seats: ";
-	const int* combinedSeats = combinedTicket.getSeatNumbers();
-	for (int i = 0; i < combinedTicket.getSeatCount(); i++) {
-		cout << combinedSeats[i] << (i < combinedTicket.getSeatCount() - 1 ? ", " : "");
-	}
+	cout << combinedTicket;
 	cout << endl << endl;
 }
 
 int main() {
 
-	testLocationClass();
+	//testLocationClass();
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << endl;
-	testEventClass();
+	//testEventClass();
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << endl;

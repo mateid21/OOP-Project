@@ -18,12 +18,13 @@ public:
     Location(const Location& other);
     ~Location();
 
-    void setStadiumName(const char* name);
     const char* getStadiumName() const;
-    void setCapacity(int cap);
     int getCapacity() const;
     int getId() const;
     static int getNoOfStadiums();
+
+    void setCapacity(int cap);
+    void setStadiumName(const char* name);
 
     friend bool operator>=(const Location& firstLocation, const Location& secondLocation);
     friend int operator-(const Location& first, const Location& second);

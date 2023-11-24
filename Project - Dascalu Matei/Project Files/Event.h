@@ -24,8 +24,9 @@ public:
     void setMatchName(const char* name);
     void setMatchDate(const char* date);
     void setTeam(int index, const char* teamName);
-    bool operator<(const Event& other) const;
-    bool operator==(const Event& other) const;
+
+    friend bool operator<(const Event& ev1, const Event& ev2);
+    friend bool operator==(const Event& ev1, const Event& ev2);
 
 private:
     void copyTeams(char* const teams[2]);

@@ -103,3 +103,40 @@ Ticket Ticket::operator+(const Ticket& other) const {
 
 	return Ticket(price + other.price, (row + other.row) / 2, newSeats, newCount);
 }
+
+ostream& operator<<(ostream& os, const Ticket& ticket) {
+	os << "Ticket created with ID: " << ticket.getTicketId() << "\n";
+	os << "Price: $" << ticket.getPrice() << ", Row: " << ticket.getRow() << ", Seat Count: " << ticket.getSeatCount() << ", Seats: ";
+	for (int i = 0; i < ticket.getSeatCount(); ++i) {
+		os << ticket.getSeatNumbers()[i] << (i < ticket.getSeatCount() - 1 ? ", " : "");
+	}
+	os << "\n";
+	return os;
+}
+
+istream& operator>>(istream& is, Ticket& ticket) {
+	double price;
+	int row, seatCount;
+
+	cout << "Creating a new ticket" << endl;
+	cout << "Enter price: ";
+	is >> price;
+	ticket.setPrice(price);
+
+	cout << "Enter row: ";
+	is >> row;
+	ticket.setRow(row);
+
+	cout << "Enter seat count: ";
+	is >> seatCount;
+	int* seats = new int[seatCount];
+	cout << "Enter seat numbers: ";
+	for (int i = 0; i < seatCount; ++i) {
+		is >> seats[i];
+	}
+	ticket.setSeatNumbers(seats, seatCount);
+
+	delete[] seats; 
+
+	return is;
+}

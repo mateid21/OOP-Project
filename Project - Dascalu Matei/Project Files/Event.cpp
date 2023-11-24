@@ -112,15 +112,16 @@ bool Event::isDateValid(const char* date) {
     return true;
 }
 
-bool Event::operator<(const Event& other) const {
-    return strcmp(matchDate, other.matchDate) < 0;
+bool operator<(const Event& ev1, const Event& ev2) {
+    return strcmp(ev1.matchDate, ev2.matchDate) < 0;
 }
 
-bool Event::operator==(const Event& other) const {
-    return strcmp(matchName, other.matchName) == 0 &&
-        strcmp(matchDate, other.matchDate) == 0 &&
-        strcmp(teams[0], other.teams[0]) == 0 &&
-        strcmp(teams[1], other.teams[1]) == 0;
+bool operator==(const Event& ev1, const Event& ev2) {
+    return strcmp(ev1.matchName, ev2.matchName) == 0 &&
+        strcmp(ev1.matchDate, ev2.matchDate) == 0 &&
+        strcmp(ev1.teams[0], ev2.teams[0]) == 0 &&
+        strcmp(ev1.teams[1], ev2.teams[1]) == 0;
 }
+
 
 
