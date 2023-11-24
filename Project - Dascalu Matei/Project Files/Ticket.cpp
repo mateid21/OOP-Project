@@ -57,14 +57,34 @@ int Ticket::getSeatCount() const {
 
 
 void Ticket::setPrice(double cost) {
-	price = cost;
+	if (cost < 0.0) {
+		throw exception("Price cannot be negative.");
+	}
+	else {
+		price = cost;
+	}
 }
 
 void Ticket::setRow(int r) {
-	row = r;
+	if (r <= 0) {
+		throw exception("Row number must be positive.");
+	}
+	else {
+		row = r;
+	}
 }
 
 void Ticket::setSeatNumbers(const int* seats, int count) {
+	for (int i = 0; i < count; ++i) {
+		if (seats[i] <= 0) {
+			throw exception("Seat numbers must be positive.");
+		}
+		for (int j = i + 1; j < count; ++j) {
+			if (seats[i] == seats[j]) {
+				throw exception("Duplicate seat numbers are not allowed.");
+			}
+		}
+	}
 	delete[] seatNumbers;
 	seatNumbers = new int[count];
 	seatCount = count;
@@ -72,6 +92,7 @@ void Ticket::setSeatNumbers(const int* seats, int count) {
 		seatNumbers[i] = seats[i];
 	}
 }
+
 
 Ticket& Ticket::operator=(const Ticket& other) {
 	if (this != &other) {
@@ -119,24 +140,64 @@ istream& operator>>(istream& is, Ticket& ticket) {
 	int row, seatCount;
 
 	cout << "Creating a new ticket" << endl;
-	cout << "Enter price: ";
-	is >> price;
-	ticket.setPrice(price);
 
-	cout << "Enter row: ";
-	is >> row;
-	ticket.setRow(row);
-
-	cout << "Enter seat count: ";
-	is >> seatCount;
-	int* seats = new int[seatCount];
-	cout << "Enter seat numbers: ";
-	for (int i = 0; i < seatCount; ++i) {
-		is >> seats[i];
+	
+	while (true) {
+		cout << "Enter price: ";
+		is >> price;
+		try {
+			ticket.setPrice(price);
+			break;
+		}
+		catch (const exception& e) {
+			cout << "Input error: " << e.what() << endl;
+			is.clear();
+			is.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
 	}
-	ticket.setSeatNumbers(seats, seatCount);
 
-	delete[] seats; 
+
+	while (true) {
+		cout << "Enter row: ";
+		is >> row;
+		try {
+			ticket.setRow(row);
+			break;
+		}
+		catch (const exception& e) {
+			cout << "Input error: " << e.what() << endl;
+			is.clear();
+			is.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
+
+	while (true) {
+		cout << "Enter seat count: ";
+		if (is >> seatCount && seatCount>0) {
+			int* seats = new int[seatCount];
+			cout << "Enter seat numbers: ";
+			for (int i = 0; i < seatCount; ++i) {
+				is >> seats[i];
+			}
+			try {
+				ticket.setSeatNumbers(seats, seatCount);
+				delete[] seats;
+				break;
+			}
+			catch (const exception& e) {
+				cout << "Input error: " << e.what() << endl;
+				is.clear();
+				is.ignore(numeric_limits<streamsize>::max(), '\n');
+			}
+		}
+		else {
+			cout << "Seat count must be a positive number." << endl;
+			is.clear();
+			is.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+	}
 
 	return is;
 }
+
+
