@@ -132,6 +132,9 @@ ostream& operator<<(ostream& os, const Event& event) {
 istream& operator>>(istream& is, Event& event) {
     char name[100], date[11], team1[50], team2[50];
 
+    is.clear();
+    is.ignore(numeric_limits<streamsize>::max(), '\n');
+
     cout << "Enter Match Name: ";
     is.getline(name, 100);
 
