@@ -123,5 +123,41 @@ bool operator==(const Event& ev1, const Event& ev2) {
         strcmp(ev1.teams[1], ev2.teams[1]) == 0;
 }
 
+ostream& operator<<(ostream& os, const Event& event) {
+    os << "Match Name: " << event.getMatchName() <<endl
+        <<"Date: " << event.getMatchDate() << ", Team 1: " << event.getTeam(0) << ", Team 2: " << event.getTeam(1) << endl;
+    return os;
+}
 
+istream& operator>>(istream& is, Event& event) {
+    char name[100], date[11], team1[50], team2[50];
 
+    cout << "Enter Match Name: ";
+    is.getline(name, 100);
+
+    while (true) {
+        cout << "Enter Date (YYYY-MM-DD): ";
+        is.getline(date, 11);
+        try
+        {
+            event.setMatchDate(date);
+            break;
+        }
+        catch (const exception& e)
+        {
+            cout << "Input error: " << e.what() << endl;
+        }
+    }
+
+    cout << "Enter Team 1: ";
+    is.getline(team1, 50);
+
+    cout << "Enter Team 2: ";
+    is.getline(team2, 50);
+
+    event.setMatchName(name);
+    event.setTeam(0, team1);
+    event.setTeam(1, team2);
+
+    return is;
+}

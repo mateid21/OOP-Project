@@ -27,6 +27,8 @@ public:
 
     friend bool operator<(const Event& ev1, const Event& ev2);
     friend bool operator==(const Event& ev1, const Event& ev2);
+    friend ostream& operator<<(ostream& os, const Event& event);
+    friend istream& operator>>(istream& is, Event& event);
 
 private:
     void copyTeams(char* const teams[2]);

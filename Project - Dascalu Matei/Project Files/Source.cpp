@@ -48,43 +48,21 @@ void testLocationClass() {
 }
 
 void testEventClass() {
-	// Testing Event class functions
-	Event footballMatch("El Clasico", "2024-03-02", "Real Madrid", "Barcelona");
-
-	cout << "Football Match: " << footballMatch.getMatchName() << endl;
-	cout << "Date: " << footballMatch.getMatchDate() << endl;
-	cout << "Team 1: " << footballMatch.getTeam(0) << endl;
-	cout << "Team 2: " << footballMatch.getTeam(1) << endl;
+	Event footballMatch;
+	cout << "Enter details for a football match (Match Name, Date, Team 1, Team 2): " << endl;
+	cin >> footballMatch;  //operator>> 
 	cout << endl;
 
-	// change the date of the match
-	footballMatch.setMatchDate("2023-03-03");
-
-	// display updated details
-	cout << "Updated Match Details: " << endl;
-	cout << "Football Match: " << footballMatch.getMatchName() << endl;
-	cout << "New Date: " << footballMatch.getMatchDate() << endl;
-	cout << "Team 1: " << footballMatch.getTeam(0) << endl;
-	cout << "Team 2: " << footballMatch.getTeam(1) << endl;
+	cout << "Football Match Details Entered: " << endl << footballMatch << endl;  //operator<< 
 	cout << endl;
 
-	// attempting to set an invalid date format
-	cout << "Attempting to set an invalid date format..." << endl;
-	try {
-		footballMatch.setMatchDate("03-03-2023");
-	}
-	catch (const exception& e) {
-		cout << e.what() << endl;
-	}
-	cout << endl;
-
-	//<checking if an event happens before or after a different event with <operator
-	Event match1("Match 1", "2022-01-25", "Team A", "Team B");
-	Event match2("Match 2", "2022-01-24", "Team C", "Team D");
-	cout << "Match 1: " << match1.getMatchDate() << "; ";
+	//checking if an event happens before or after a different event with <operator
+	Event match2("Match 2", "2022-01-24", "Team A", "Team B");
+	cout << match2 << endl;
+	cout << "Match 1: " << footballMatch.getMatchDate() << "; ";
 	cout << "Match 2: " << match2.getMatchDate();
 	cout << endl;
-	if (match1 < match2) {
+	if (footballMatch < match2) {
 		cout << "Match 1 occurs before Match 2" << endl;
 	}
 	else {
@@ -93,16 +71,16 @@ void testEventClass() {
 	cout << endl;
 
 	//==operator checking if two events are the same
-	Event match3("Match 1", "2022-01-25", "Team A", "Team B");
-
-	if (match1 == match2) {
+	Event match3("Match 3", "2022-01-25", "Team C", "Team D");
+	cout << match3 << endl;
+	if (footballMatch == match2) {
 		cout << "Match 1 and Match 2 are the same." << endl;
 	}
 	else {
 		cout << "Match 1 and Match 2 are different." << endl;
 	}
 
-	if (match1 == match3) {
+	if (footballMatch == match3) {
 		cout << "Match 1 and Match 3 are the same." << endl;
 	}
 	else {
@@ -146,11 +124,11 @@ void testTicketClass() {
 
 int main() {
 
-	testLocationClass();
+	//testLocationClass();
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << endl;
-	//testEventClass();
+	testEventClass();
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << endl;
