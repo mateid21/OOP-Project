@@ -146,7 +146,7 @@ void testTicketClass() {
 
 int main() {
 
-	//testLocationClass();
+	testLocationClass();
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << endl;
@@ -154,7 +154,7 @@ int main() {
 	cout << endl;
 	cout << "-------------------------------------------------------------------------------" << endl;
 	cout << endl;
-	testTicketClass();
+	//testTicketClass();
 	cout << endl;
 
 

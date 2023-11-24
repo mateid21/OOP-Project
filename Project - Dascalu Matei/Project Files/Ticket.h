@@ -35,10 +35,6 @@ public:
     friend ostream& operator<<(ostream& os, const Ticket& ticket);
     friend istream& operator>>(istream& is, Ticket& ticket);
 
-private:
-    void validatePrice(double cost);
-    void validateRow(int row);
-    void validateSeatNumbers(const int* seats, int count);
 };
 
 #endif 

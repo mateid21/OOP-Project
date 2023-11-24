@@ -43,6 +43,9 @@ void Location::setCapacity(int cap) {
 	if (cap >= 0) {
 		capacity = cap;
 	}
+	else {
+		throw exception("Capacity has to be a positive number");
+	}
 }
 
 int Location::getCapacity() const {
@@ -79,11 +82,22 @@ istream& operator>>(istream& is, Location& loc) {
 	}
 	is.getline(tempName, 100);
 
-	cout << "Enter Capacity: ";
-	is >> tempCapacity;
+	while (true) {
+		cout << "Enter Capacity: ";
+		is >> tempCapacity;
+		try {
+			loc.setCapacity(tempCapacity);
+			break; 
+		}
+		catch (const exception& e) {
+			cout << "Input error: " << e.what() << endl;
+			is.clear();
+			is.ignore(numeric_limits<streamsize>::max(), '\n');
+		}		
+	}
 
 	loc.setStadiumName(tempName);
-	loc.setCapacity(tempCapacity);
+	
 
 	return is;
 }
