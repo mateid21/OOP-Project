@@ -122,19 +122,41 @@ void testTicketClass() {
 	cout << endl << endl;
 }
 
+void showMenu() {
+	cout << endl;
+	cout << "Ticketing Menu" << endl;
+	cout << "1. Test Location Class" << endl;
+	cout << "2. Test Event Class" << endl;
+	cout << "3. Test Ticket Class" << endl;
+	cout << "4. Exit" << endl;
+	cout << "Enter your choice: ";
+	cout << endl;
+}
+
 int main() {
+	int choice;
 
-	testLocationClass();
-	cout << endl;
-	cout << "-------------------------------------------------------------------------------" << endl;
-	cout << endl;
-	testEventClass();
-	cout << endl;
-	cout << "-------------------------------------------------------------------------------" << endl;
-	cout << endl;
-	testTicketClass();
-	cout << endl;
+	do {
+		showMenu();
+		cin >> choice;
 
+		switch (choice) {
+		case 1:
+			testLocationClass();
+			break;
+		case 2:
+			testEventClass();
+			break;
+		case 3:
+			testTicketClass();
+			break;
+		case 4:
+			cout << "Exiting program..." << endl;
+			break;
+		default:
+			cout << "Invalid choice. Please try again." << endl;
+		}
+	} while (choice != 4);
 
 	return 0;
 }
