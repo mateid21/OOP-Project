@@ -1,0 +1,6 @@
+Location Wembley 90000
+Event ChampionsLeagueFinal 2024-05-25 Liverpool RealMadrid
+Ticket 250.50 15 3 101 102 103
+Location CampNou 99354
+Event ElClasico 2024-04-10 Barcelona RealMadrid
+Ticket 300.00 20 4 105 106 107 108

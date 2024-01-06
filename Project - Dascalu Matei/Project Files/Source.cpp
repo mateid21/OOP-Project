@@ -2,6 +2,9 @@
 #include "Event.h"
 #include "Ticket.h"
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <vector>
 
 using namespace std;
 
@@ -122,13 +125,60 @@ void testTicketClass() {
 	cout << endl << endl;
 }
 
+void processFileData(const string& filename) {
+	ifstream file(filename);
+	string type;
+
+	if (!file) {
+		cout << "Error opening file." << endl;
+		return;
+	}
+
+	while (file >> type) {
+		if (type == "Location") {
+			string name;
+			int capacity;
+			if (file >> name >> capacity) {
+				Location loc(name.c_str(), capacity);
+				cout << loc << endl;
+			}
+		}
+		else if (type == "Event") {
+			string name, date, team1, team2;
+			if (file >> name >> date >> team1 >> team2) {
+				Event evt(name.c_str(), date.c_str(), team1.c_str(), team2.c_str());
+				cout << evt << endl;
+			}
+		}
+		else if (type == "Ticket") {
+			double price;
+			int row, count;
+			if (file >> price >> row >> count) {
+				vector<int> seats(count);
+				for (int i = 0; i < count; ++i) {
+					file >> seats[i];
+				}
+				Ticket ticket(price, row, seats.data(), count);
+				cout << ticket << endl;
+			}
+		}
+
+		file.ignore(numeric_limits<streamsize>::max(), '\n');
+	}
+
+	file.close();
+}
+
+
+
 void showMenu() {
 	cout << endl;
 	cout << "Ticketing Menu" << endl;
 	cout << "1. Test Location Class" << endl;
 	cout << "2. Test Event Class" << endl;
 	cout << "3. Test Ticket Class" << endl;
-	cout << "4. Exit" << endl;
+	cout << "4. Process Data from File" << endl;
+	cout << "5. Exit" << endl;
 	cout << "Enter your choice: ";
 	cout << endl;
 }
@@ -150,7 +200,15 @@ int main() {
 		case 3:
 			testTicketClass();
 			break;
-		case 4:
+		case 4: {
+			string filename;
+			cout << "Enter file name: ";
+			cin >> filename;
+			cout << endl;
+			processFileData(filename);
+			break;
+		}
+		case 5:
 			cout << "Exiting program..." << endl;
 			break;
 		default:
