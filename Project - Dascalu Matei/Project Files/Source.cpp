@@ -3,13 +3,11 @@
 #include "Ticket.h"
 #include <iostream>
 #include <fstream>
-#include <sstream>
 #include <vector>
 
 using namespace std;
 
 void testLocationClass() {
-	//Testing Location class functions
 
 	Location stadium;
 	cout << "Enter details for a new stadium (name and capacity) " << endl;
@@ -91,8 +89,8 @@ void testEventClass() {
 	}
 }
 
-void testTicketClass() {
-	// Testing Ticket class functions
+void testTicketClass(vector<Ticket>& tickets) {
+	/*// Testing Ticket class functions
 	int seats[] = { 12, 13, 14 };
 	Ticket ticket1(100.0, 5, seats, 3);
 
@@ -109,20 +107,22 @@ void testTicketClass() {
 
 	// display updated ticket details
 	cout << ticket1;
-	cout << endl;
+	cout << endl;*/
 
 	//create a second ticket
 	Ticket ticket2;
 	cin >> ticket2;
 	cout << ticket2<<endl;
 	cout << endl;
+	tickets.push_back(ticket2);
 
-	//+op and =op
+	/*//+op and =op
 	Ticket combinedTicket = ticket1 + ticket2;
 
 	// display details of the combined ticket
 	cout << combinedTicket;
 	cout << endl << endl;
+	tickets.push_back(combinedTicket);*/
 }
 
 void processFileData(const string& filename) {
@@ -169,6 +169,41 @@ void processFileData(const string& filename) {
 	file.close();
 }
 
+void saveTicketsToFile(const vector<Ticket>& tickets, const string& filename) {
+	ofstream outFile(filename, ios::binary);
+	if (!outFile) {
+		cerr << "Cannot open file for writing." << endl;
+		return;
+	}
+
+	for (const auto& ticket : tickets) {
+		if (!outFile.write(reinterpret_cast<const char*>(&ticket), sizeof(ticket))) {
+			cerr << "Error writing to file." << endl;
+			break;
+		}
+	}
+
+	outFile.close();
+}
+
+void loadTicketsFromFile(vector<Ticket>& tickets, const string& filename) {
+	ifstream inFile(filename, ios::binary);
+	if (!inFile) {
+		cerr << "Cannot open file for reading." << endl;
+		return;
+	}
+
+	Ticket ticket;
+	while (inFile) {
+		ticket.deserialize(inFile);
+		if (inFile) {
+			tickets.push_back(ticket);
+		}
+	}
+
+	inFile.close();
+}
+
 
 
 void showMenu() {
@@ -178,13 +213,23 @@ void showMenu() {
 	cout << "2. Test Event Class" << endl;
 	cout << "3. Test Ticket Class" << endl;
 	cout << "4. Process Data from File" << endl;
-	cout << "5. Exit" << endl;
+	cout << "5. Save Tickets" << endl;
+	cout << "6. Exit" << endl;
 	cout << "Enter your choice: ";
 	cout << endl;
 }
 
 int main() {
 	int choice;
+	vector<Ticket> tickets;
+	string ticketFilename = "tickets.bin";
+
+	loadTicketsFromFile(tickets, ticketFilename);
+	cout << "Loaded Tickets:" << endl;
+	for (const auto& ticket : tickets) {
+		cout << ticket << endl;
+	}
+	cout << endl;
 
 	do {
 		showMenu();
@@ -198,7 +243,7 @@ int main() {
 			testEventClass();
 			break;
 		case 3:
-			testTicketClass();
+			testTicketClass(tickets);
 			break;
 		case 4: {
 			string filename;
@@ -209,12 +254,16 @@ int main() {
 			break;
 		}
 		case 5:
+			saveTicketsToFile(tickets, ticketFilename);
+			cout << "Tickets Saved." << endl;
+			break;
+		case 6:
 			cout << "Exiting program..." << endl;
 			break;
 		default:
 			cout << "Invalid choice. Please try again." << endl;
 		}
-	} while (choice != 4);
+	} while (choice != 6);
 
 	return 0;
 }

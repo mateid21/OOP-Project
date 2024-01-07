@@ -35,6 +35,9 @@ public:
     friend ostream& operator<<(ostream& os, const Ticket& ticket);
     friend istream& operator>>(istream& is, Ticket& ticket);
 
+    void serialize(ofstream& out) const;
+    void deserialize(ifstream& in);
+
 };
 
 #endif 

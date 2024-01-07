@@ -1,5 +1,6 @@
 #include "Ticket.h"
 #include <iostream>
+#include <fstream>
 
 int Ticket::ticketNumber = 0;
 
@@ -200,4 +201,24 @@ istream& operator>>(istream& is, Ticket& ticket) {
 	return is;
 }
 
+void Ticket::serialize(ofstream& out) const {
+	out.write(reinterpret_cast<const char*>(&ticketId), sizeof(ticketId));
+	out.write(reinterpret_cast<const char*>(&price), sizeof(price));
+	out.write(reinterpret_cast<const char*>(&row), sizeof(row));
+	out.write(reinterpret_cast<const char*>(&seatCount), sizeof(seatCount));
+	out.write(reinterpret_cast<const char*>(seatNumbers), seatCount * sizeof(int));
+}
+
+void Ticket::deserialize(ifstream& in) {
+	in.read(reinterpret_cast<char*>(&ticketId), sizeof(ticketId));
+	in.read(reinterpret_cast<char*>(&price), sizeof(price));
+	in.read(reinterpret_cast<char*>(&row), sizeof(row));
+	in.read(reinterpret_cast<char*>(&seatCount), sizeof(seatCount));
+
+	delete[] seatNumbers;
+	seatNumbers = new int[seatCount];
+	for (int i = 0; i < seatCount; i++) {
+		in.read(reinterpret_cast<char*>(&seatNumbers[i]), sizeof(seatNumbers[i]));
+	}
+}
 
