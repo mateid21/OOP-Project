@@ -15,6 +15,7 @@ private:
     int seatCount;
 
 public:
+
     Ticket();
     Ticket(double cost, int row, const int* seats, int count);
     Ticket(const Ticket& other);
@@ -25,7 +26,9 @@ public:
     int getRow() const;
     const int* getSeatNumbers() const;
     int getSeatCount() const;
+    static int getTicketNumber();
 
+    static void setTicketNumber(int number);
     void setPrice(double cost);
     void setRow(int row);
     void setSeatNumbers(const int* seats, int count);

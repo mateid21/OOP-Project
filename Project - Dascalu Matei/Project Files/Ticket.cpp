@@ -35,7 +35,6 @@ Ticket::~Ticket() {
 	delete[] seatNumbers;
 }
 
-
 int Ticket::getTicketId() const {
 	return ticketId;
 }
@@ -94,6 +93,13 @@ void Ticket::setSeatNumbers(const int* seats, int count) {
 	}
 }
 
+void Ticket::setTicketNumber(int number) {
+	Ticket::ticketNumber = number;
+}
+
+int Ticket::getTicketNumber() {
+	return Ticket::ticketNumber;
+}
 
 Ticket& Ticket::operator=(const Ticket& other) {
 	if (this != &other) {
@@ -201,24 +207,27 @@ istream& operator>>(istream& is, Ticket& ticket) {
 	return is;
 }
 
-void Ticket::serialize(ofstream& out) const {
-	out.write(reinterpret_cast<const char*>(&ticketId), sizeof(ticketId));
-	out.write(reinterpret_cast<const char*>(&price), sizeof(price));
-	out.write(reinterpret_cast<const char*>(&row), sizeof(row));
-	out.write(reinterpret_cast<const char*>(&seatCount), sizeof(seatCount));
-	out.write(reinterpret_cast<const char*>(seatNumbers), seatCount * sizeof(int));
+void Ticket::serialize(std::ofstream& out) const {
+	out.write((char*)&ticketId, sizeof(ticketId));
+	out.write((char*)&price, sizeof(price));
+	out.write((char*)&row, sizeof(row));
+	out.write((char*)&seatCount, sizeof(seatCount));
+	for (int i = 0; i < seatCount; i++) {
+		out.write((char*)&seatNumbers[i], sizeof(seatNumbers[i]));
+	}
 }
 
-void Ticket::deserialize(ifstream& in) {
-	in.read(reinterpret_cast<char*>(&ticketId), sizeof(ticketId));
-	in.read(reinterpret_cast<char*>(&price), sizeof(price));
-	in.read(reinterpret_cast<char*>(&row), sizeof(row));
-	in.read(reinterpret_cast<char*>(&seatCount), sizeof(seatCount));
 
+void Ticket::deserialize(std::ifstream& in) {
+	in.read((char*)&ticketId, sizeof(ticketId));
+	in.read((char*)&price, sizeof(price));
+	in.read((char*)&row, sizeof(row));
+	in.read((char*)&seatCount, sizeof(seatCount));
 	delete[] seatNumbers;
 	seatNumbers = new int[seatCount];
 	for (int i = 0; i < seatCount; i++) {
-		in.read(reinterpret_cast<char*>(&seatNumbers[i]), sizeof(seatNumbers[i]));
+		in.read((char*)&seatNumbers[i], sizeof(seatNumbers[i]));
 	}
 }
+
 

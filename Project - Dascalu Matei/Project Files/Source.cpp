@@ -177,10 +177,7 @@ void saveTicketsToFile(const vector<Ticket>& tickets, const string& filename) {
 	}
 
 	for (const auto& ticket : tickets) {
-		if (!outFile.write(reinterpret_cast<const char*>(&ticket), sizeof(ticket))) {
-			cerr << "Error writing to file." << endl;
-			break;
-		}
+		ticket.serialize(outFile);
 	}
 
 	outFile.close();
@@ -193,8 +190,8 @@ void loadTicketsFromFile(vector<Ticket>& tickets, const string& filename) {
 		return;
 	}
 
-	Ticket ticket;
-	while (inFile) {
+	while (inFile.peek() != EOF) {
+		Ticket ticket;
 		ticket.deserialize(inFile);
 		if (inFile) {
 			tickets.push_back(ticket);
